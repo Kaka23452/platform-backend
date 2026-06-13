@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "27"
+  creationTimestamp: "2026-06-12T05:00:32Z"
+  generation: 33
+  name: n8n
+  namespace: tefadow920-dev
+  resourceVersion: "5659559410"
+  uid: f4c66168-51cd-4608-9408-4d0e60e4cbed
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: n8n
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2026-06-12T19:53:55Z"
+      labels:
+        app: n8n
+    spec:
+      containers:
+      - env:
+        - name: N8N_USER_FOLDER
+          value: /tmp/n8n
+        - name: DB_TYPE
+          value: postgresdb
+        - name: DB_POSTGRESDB_HOST
+          value: postgresql
+        - name: DB_POSTGRESDB_PORT
+          value: "5432"
+        - name: DB_POSTGRESDB_DATABASE
+          value: sampledb
+        - name: DB_POSTGRESDB_USER
+          value: userRQ2
+        - name: DB_POSTGRESDB_PASSWORD
+          value: EEUnOlEejvlruEVa
+        - name: EXECUTIONS_MODE
+          value: regular
+        - name: N8N_PORT
+          value: "5678"
+        - name: N8N_ENCRYPTION_KEY
+          value: d1d9a6533ca579f80466741e5cddd5f6376ae4dfb98e19950144876b01bcb46b
+        - name: N8N_HOST
+          value: n8n-tefadow920-dev.apps.rm2.thpm.p1.openshiftapps.com
+        - name: N8N_PROTOCOL
+          value: https
+        - name: N8N_EDITOR_BASE_URL
+          value: https://n8n-tefadow920-dev.apps.rm2.thpm.p1.openshiftapps.com
+        - name: N8N_RUNNERS_ENABLED
+          value: "true"
+        - name: WEBHOOK_URL
+          value: https://n8n-tefadow920-dev.apps.rm2.thpm.p1.openshiftapps.com/
+        image: n8nio/n8n:1.80.0
+        imagePullPolicy: Always
+        name: n8n
+        ports:
+        - containerPort: 5678
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2026-06-12T05:00:32Z"
+    lastUpdateTime: "2026-06-12T19:53:59Z"
+    message: ReplicaSet "n8n-676495fb45" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2026-06-13T08:34:14Z"
+    lastUpdateTime: "2026-06-13T08:34:14Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 33
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
