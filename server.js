@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
 
+const projectRoutes = require("./routes/projectRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -31,6 +33,8 @@ app.get("/health/db", async (req, res) => {
     });
   }
 });
+
+app.use("/api/projects", projectRoutes);
 
 const PORT = process.env.PORT || 8080;
 
