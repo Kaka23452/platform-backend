@@ -8,7 +8,7 @@ const {
   getProjects,
   createProject
 } = require('../controllers/projectController');
-
+router.post('/test-n8n', auth, testN8n);
 router.get('/', auth, getProjects);
 router.post('/', auth, createProject);
 
