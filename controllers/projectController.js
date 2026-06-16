@@ -38,3 +38,31 @@ module.exports = {
   getProjects,
   createProject
 };
+const axios = require("axios");
+
+async function testN8n(req, res) {
+  try {
+
+    const response = await axios.post(
+      "http://n8n:5678/webhook-test/test-flow",
+      {
+        source: "platform-backend"
+      }
+    );
+
+    res.json({
+      success: true,
+      n8n: response.data
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+
+  }
+}
